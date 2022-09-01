@@ -9,7 +9,7 @@
 -   userName: 入室者名
 
 ```js
-io.emit("enterMyselfEvent", userName);
+socket.emit("enterMyselfEvent", userName);
 ```
 
 出力 (enterOtherEvent イベント経由) 他の接続している端末全てに送信
@@ -27,7 +27,7 @@ io.emit("enterMyselfEvent", userName);
 -   userName: 退室者名
 
 ```js
-io.emit("exitOtherEvent", userName);
+socket.emit("exitMyselfEvent", userName);
 ```
 
 出力 (exitOtherEvent イベント経由) 他の接続している端末全てに送信
@@ -46,7 +46,7 @@ io.emit("exitOtherEvent", userName);
 -   message: 投稿内容（空白でない文字列、空白の場合は出力は空です）
 
 ```js
-io.emit("exitOtherEvent", { userName, message });
+socket.emit("sendMessageEvent", { userName, message });
 ```
 
 出力 (receiveMessageEvent イベント経由) 接続している端末全てに送信
