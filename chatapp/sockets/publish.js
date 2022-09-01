@@ -7,5 +7,6 @@ module.exports = function (socket, io) {
             return;
         }
         io.sockets.emit("receiveMessageEvent", userName + " : " + message);
+
     });
 };
