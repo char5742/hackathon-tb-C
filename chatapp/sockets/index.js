@@ -8,7 +8,7 @@ module.exports = function (server) {
         require("./publish")(socket, io);
 
         // 入室モジュールの呼出
-        require("./enter")(socket, io);
+        require("./enter")(socket);
 
         // 退室モジュールの呼出
         require("./exit")(socket);
