@@ -15,7 +15,7 @@ socket.emit("enterMyselfEvent", userName);
 出力 (enterOtherEvent イベント経由) 他の接続している端末全てに送信
 
 ```js
-"userNameさんが入室しました。";
+userName;
 ```
 
 ## 退室
@@ -76,4 +76,20 @@ socket.emit("deleteMessageMyselfEvent", messageId);
 
 ```js
 messageId;
+```
+
+## ユーザー一覧
+
+入室者一覧をサーバーに要求します
+
+```js
+socket.emit("getAllUsernameEvent");
+```
+
+出力 (getAllUsernameResponseEvent イベント経由) 自端末のみに送信
+
+```js
+{
+    usernameList: ["接続しているユーザー名"];
+}
 ```
