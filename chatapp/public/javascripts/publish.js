@@ -12,6 +12,17 @@ function publish() {
     return false;
 }
 
+// エンターキーで投稿する
+$("#message").keydown(function (e) {
+    console.log(e.key);
+    if (e.ctrlKey) {
+        if (e.key === "Enter") {
+            publish();
+            return false;
+        }
+    }
+});
+
 // サーバから受信した投稿メッセージを画面上に表示する
 socket.on(
     "receiveMessageEvent",
