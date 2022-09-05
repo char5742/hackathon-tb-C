@@ -1,5 +1,7 @@
 "use strict";
+
 const { Server } = require("socket.io");
+const { signUp } = require("./sign");
 module.exports = function (server) {
     const io = new Server(server);
     io.on("connection", async function (socket) {
@@ -12,5 +14,15 @@ module.exports = function (server) {
 
         // 退室モジュールの呼出
         require("./exit")(socket);
+
+        // 削除モジュールの呼出
+        require("./delete")(socket, io);
+
+        // 退室モジュールの呼出
+        require("./exit")(socket);
+    });
+
+    io.of("/sign").on("connection", async function (socket) {
+        signUp(socket);
     });
 };

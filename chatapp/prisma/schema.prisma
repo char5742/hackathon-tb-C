@@ -32,7 +32,7 @@ model Message {
   id       Int      @id @default(autoincrement())
   data     String
   isMemo   Boolean
-  roomId   DateTime
+  roomId   Int
   created  DateTime
   sender   User?    @relation(fields: [senderId], references: [id])
   senderId Int?

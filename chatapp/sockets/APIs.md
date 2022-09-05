@@ -43,14 +43,37 @@ socket.emit("exitMyselfEvent", userName);
 パラメータ:
 
 -   userName: 送信者名
--   message: 投稿内容（空白でない文字列、空白の場合は出力は空です）
+-   data: 投稿内容（空白でない文字列、空白の場合は出力は空です）
 
 ```js
-socket.emit("sendMessageEvent", { userName, message });
+socket.emit("sendMessageEvent", { userName, data });
 ```
 
 出力 (receiveMessageEvent イベント経由) 接続している端末全てに送信
 
 ```js
-"userName : message";
+{
+    userName: "送信者名",
+    message: "投稿内容（空白でない文字列、空白の場合は出力は空です）",
+    sendDate: "送信日時（サーバー到達時）",
+    messageId: "メッセージの固有 ID",
+};
+```
+
+## 削除
+
+メッセージを削除します。
+
+パラメータ:
+
+-   messageId: メッセージ ID
+
+```js
+socket.emit("deleteMessageMyselfEvent", messageId);
+```
+
+出力 (deleteMessageOtherEvent イベント経由) 接続している端末全てに送信
+
+```js
+messageId;
 ```

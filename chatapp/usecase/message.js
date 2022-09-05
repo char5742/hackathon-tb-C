@@ -4,27 +4,46 @@ const prisma = require("../prisma/db");
 exports.MessageUsecase = class {
     /**
      *
-     * @param {number} senderId
+     * @param {string} senderName
      * @param {number} roomId
      * @param {string} data
+     * @return {Promise<Message>}
      */
-    static async sendMessage(senderId, roomId, data, isMemo = false) {
+    static async sendMessage(senderName, roomId, data, isMemo = false) {
+        const message = await prisma.message.create({
+            data: {
+                data,
+                roomId,
+                isMemo,
+                created: new Date(),
+            },
+        });
         await prisma.user.update({
             where: {
-                id: senderId,
+                name: senderName,
             },
             data: {
                 messages: {
-                    create: {
-                        data,
-                        roomId,
-                        isMemo,
-                        created: new Date(),
-                    },
+                    connect: { id: message.id },
                 },
             },
         });
+        return message;
     }
+
+    /**
+     *
+     * @param {number} messageid
+     * @return {Promise<void>}
+     */
+    static async deleteMessage(messageid) {
+        await prisma.message.delete({
+            where: {
+                messageid,
+            },
+        });
+    }
+
     /**
      *
      * @param {number} roomId

@@ -1,4 +1,3 @@
-const { createUser, readUser } = require("../db/crud");
 const { User, Message } = require("@prisma/client");
 const prisma = require("../prisma/db");
 class UsedException extends Error {}
@@ -18,12 +17,13 @@ exports.UserUsecase = class {
         });
         // 同じ名前が存在しないように
         if (user != null) {
-            throw UsedException();
+            throw new UsedException();
         }
         await prisma.user.create({
             data: {
                 name: userName,
                 password: password,
+                roomId: 1,
             },
         });
     }
