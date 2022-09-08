@@ -14,5 +14,12 @@ function enter() {
         return;
     }
     socket.emit("signUpEvent", userName);
-    socket.on("signUpResponseEvent", $("form").submit);
+    socket.on("signUpResponseEvent", (status) => {
+        if (status === false) {
+            alert("そのユーザー名は使われています");
+            return;
+        } 
+        $("form").submit();
+        }
+        );
 }
