@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <h1>Node Chat サンプル</h1>
+    </div>
+    <div class="row">
+        <form method="post" action="/room">
+            <div class="signup-form">
+                ユーザ名
+                <input
+                    type="text"
+                    id="userName"
+                    name="userName"
+                    class="signup-user_name_text"
+                />
+                パスワード
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="signup-password_text"
+                />
+            </div>
+            <div class="signup-enter">
+                <input
+                    type="button"
+                    value="サインアップ"
+                    class="common-button signup-enter_button"
+                    onclick="signup();"
+                />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/javascripts/signup.js"></script>

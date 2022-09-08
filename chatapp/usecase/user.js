@@ -41,14 +41,7 @@ exports.UserUsecase = class {
         if (user.password !== password) {
             return null;
         }
-        await prisma.user.update({
-            where: {
-                name: userName,
-            },
-            data: {
-                loginDate: new Date(),
-            },
-        });
+
         return user;
     }
 

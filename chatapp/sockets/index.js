@@ -1,7 +1,7 @@
 "use strict";
 const { Server } = require("socket.io");
 const { getAllUsername } = require("./username");
-const { signUp } = require("./sign");
+const { signUp, signIn } = require("./sign");
 module.exports = function (server) {
     const io = new Server(server);
     io.on("connection", async function (socket) {
@@ -23,5 +23,6 @@ module.exports = function (server) {
 
     io.of("/sign").on("connection", async function (socket) {
         signUp(socket);
+        signIn(socket);
     });
 };
