@@ -6,6 +6,11 @@ function publish() {
     const userName = $("#userName").val();
     // 入力されたメッセージを取得
     const data = $("#message").val();
+    console.log(data);
+    if ((!data)||!data.match(/\S/g)) {
+        $("#message").val("");
+        return;
+    }
     $("#message").val("");
     // 投稿内容を送信
     socket.emit("sendMessageEvent", { userName, data });
@@ -38,5 +43,6 @@ socket.on(
                 messageId +
                 "</p>"
         );
+
     }
 );
