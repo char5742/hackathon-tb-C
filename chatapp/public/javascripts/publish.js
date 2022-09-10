@@ -33,15 +33,10 @@ socket.on(
     "receiveMessageEvent",
     function ({ userName, message, sendDate, messageId }) {
         $("#thread").prepend(
-            "<p>" +
-                userName +
-                ":" +
-                message +
-                ":" +
-                sendDate +
-                ":" +
-                messageId +
-                "</p>"
+            `<p id="${messageId}">` +
+                `${userName}:${message}:${sendDate}:${messageId}` +
+                `<button type='button' onclick='deleteMessage(${messageId})'>削除</button>` +
+            `</p>`
         );
 
     }

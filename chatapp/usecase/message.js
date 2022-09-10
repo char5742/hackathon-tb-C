@@ -39,7 +39,7 @@ exports.MessageUsecase = class {
     static async deleteMessage(messageid) {
         await prisma.message.delete({
             where: {
-                messageid,
+                id: messageid,
             },
         });
     }
