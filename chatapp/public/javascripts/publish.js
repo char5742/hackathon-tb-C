@@ -32,12 +32,20 @@ $("#message").keydown(function (e) {
 socket.on(
     "receiveMessageEvent",
     function ({ userName, message, sendDate, messageId }) {
-        $("#thread").prepend(
-            `<p id="${messageId}">` +
-                `${userName}:${message}:${sendDate}:${messageId}` +
-                `<button type='button' onclick='deleteMessage(${messageId})'>削除</button>` +
-            `</p>`
-        );
-
+        if (userName === $("#userName").val() || $("#pause-state").val() === "active") {
+            $("#thread").prepend(
+                `<p id="${messageId}">` +
+                    `${userName}:${message}:${sendDate}:${messageId}` +
+                    `<button type='button' onclick='deleteMessage(${messageId})'>削除</button>` +
+                `</p>`
+            )
+        }
+        if (userName !== $("#userName").val() && $("#pause-state").val() === "active") {
+            
+            const n = new Notification("新しい投稿",{
+                body: `${userName} : ${message}`,
+                timeout: 5*1000
+            });
+        }
     }
 );
