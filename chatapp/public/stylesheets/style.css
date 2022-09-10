@@ -1,7 +1,8 @@
 /*
  * 画面全体に関する設定
  */
-body {
+
+.sign-bg {
     height: 100vh;
     font: 14px "Lucida Grande", Meiryo, Helvetica, Arial, sans-serif;
     background-image: url("/img/back.png");
@@ -9,13 +10,14 @@ body {
     background-repeat: no-repeat;
 }
 
-a {
+/* a {
     color: #00b7ff;
 }
 
 div {
     margin: 20px 0px;
-}
+} */
+
 #img {
     position: absolute;
     top: 50%;
@@ -73,33 +75,6 @@ div {
 .index-enter_button {
 }
 
-/*
- * チャットルーム画面（room.hbs）に関する設定
- */
-.room-login_user {
-}
-
-.room-message {
-}
-
 .room-message_textarea {
     width: 500px;
-}
-
-.room-submit {
-}
-
-.room-publish_button {
-}
-
-.room-memo_button {
-}
-
-.room-thread {
-}
-
-.room-exit {
-}
-
-.room-exit_button {
 }

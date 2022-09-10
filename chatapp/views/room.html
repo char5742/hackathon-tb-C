@@ -1,0 +1,82 @@
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/enter.js"></script>
+<script src="/javascripts/publish.js"></script>
+<script src="/javascripts/memo.js"></script>
+<script src="/javascripts/exit.js"></script>
+<script src="/javascripts/username.js"></script>
+
+<nav
+    id="nav"
+    class="navbar navbar-expand-lg navbar-dart pb-3 ps-5 bg-primary opacity-75"
+>
+    <img src="/img/Rink.svg" alt="logo" />
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div
+            class="col-3 align-items-start p-0 bg-secondary"
+            style="--bs-bg-opacity: 0.8"
+        >
+            <h3 class="text-center bg-secondary text-white">入室者</h3>
+            <div id="user_list"></div>
+        </div>
+        <div class="col align-items-start p-0">
+            <div class="container">
+                <div class="row">
+                    <div class="container" id="thread"></div>
+                </div>
+                <div
+                    class="row align-items-end p-3 bg-neutralVariant"
+                    style="--bs-bg-opacity: 0.6"
+                    id="input_space"
+                >
+                    <div class="room-login_user">
+                        <input
+                            id="userName"
+                            type="hidden"
+                            value="{{userName}}"
+                        />
+                    </div>
+                    <div class="col-11 room-message">
+                        <textarea
+                            id="message"
+                            rows="3"
+                            class="form-control"
+                            placeholder="投稿文を入力してください"
+                        ></textarea>
+                    </div>
+                    <div class="col room-submit">
+                        <div class="row">
+                            <button
+                                value="メモ"
+                                class="btn btn-secondary w-auto"
+                                onclick="memo();"
+                            >
+                                <i
+                                    class="bi bi-pencil-square text-white fs-4"
+                                ></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <button
+                                value="投稿"
+                                class="btn btn-primary w-auto"
+                                onclick="publish();"
+                            >
+                                <i class="bi bi-send text-white fs-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.addEventListener("load", (event) => {
+        const inputHeight = $("#input_space").outerHeight(true);
+        const navHeight = $("#nav").outerHeight(true);
+        const windowHeight = $(window).height();
+        $("#thread").height(windowHeight - inputHeight - navHeight);
+    });
+</script>

@@ -1,0 +1,71 @@
+<html lang="ja">
+    <head>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <script src="/javascripts/index.js"></script>
+    </head>
+    <body>
+        <!-- <img src="../img/back.png" class="img-fluid" alt="..." /> -->
+        <!-- <img src="../img/indexcard.png" alt="" style="width:600px;" /> -->
+        <div class="sign-bg">
+            <div id="img">
+                <div class="d-flex justify-content-center">
+                    <div id="Rink">
+                        <img src="../img/Rink.svg" alt="logo" />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center" id="Rinkb">
+                    <form method="post" action="/room">
+                        <div
+                            class="d-flex flex-column justify-content-center mt-5"
+                        >
+                            <label class="mt-2">ユーザ名</label>
+                            <input
+                                type="text"
+                                id="userName"
+                                name="userName"
+                                class="index-user_name_text"
+                            />
+                            <label class="mt-2">パスワード</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="index-password_text"
+                            />
+                            <a
+                                class="text-end text-muted text-decoration-none"
+                                href="/signup"
+                            >新規の方はこちら</a>
+
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <input
+                                type="button"
+                                value="入室する"
+                                class="common-button index-enter_button"
+                                onclick="enter();"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
