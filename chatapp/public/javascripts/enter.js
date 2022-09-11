@@ -1,10 +1,10 @@
 "use strict";
 
 // 入室メッセージをサーバに送信する
-// 入力されたユーザ名を取得する
-const userName = $("#userName").val();
+// ルームIDを取得する
+const roomId = 1;
 // 入室メッセージイベントを送信する
-socket.emit("enterMyselfEvent", userName);
+socket.emit("enterMyselfEvent", roomId);
 
 // サーバから受信した入室メッセージを画面上に表示する
 socket.on("enterOtherEvent", function (name) {
