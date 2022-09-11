@@ -12,5 +12,5 @@ function exit() {
 
 // サーバから受信した退室メッセージを画面上に表示する
 socket.on('exitOtherEvent', function (data) {
-    $('#thread').prepend('<p>' +data+ '</p>');
+    $('#thread').prepend('<div class="d-inline-flex rounded-pill p-2 bg-secondary opacity-75 justify-content-center text-white">' + data + '</div>');
 });
