@@ -78,3 +78,38 @@ div {
 .room-message_textarea {
     width: 500px;
 }
+
+/*
+ *  メッセージの設定
+ */
+
+ .message-text {
+    white-space: pre-wrap;
+ }
+
+.message-contextmenu {
+    text-align: center;
+    display: none;
+    position: fixed;
+    left:0px;
+    top:0px;
+}
+
+.message-contextmenu ul {
+	padding-left: 0;
+    margin-bottom: 0;
+	list-style: none;
+	display: inline-block;
+}
+
+.message-contextmenu li {
+    text-align: left;
+    list-style: none;
+    cursor:pointer; 
+    overflow-wrap: break-word;
+    word-wrap: break-word; 
+}
+
+.message-contextmenu.show {
+    display: block;
+}

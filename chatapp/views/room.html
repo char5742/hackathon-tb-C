@@ -1,10 +1,3 @@
-<script src="/javascripts/socket.js"></script>
-<script src="/javascripts/enter.js"></script>
-<script src="/javascripts/publish.js"></script>
-<script src="/javascripts/memo.js"></script>
-<script src="/javascripts/exit.js"></script>
-<script src="/javascripts/username.js"></script>
-
 <nav
     id="nav"
     class="navbar navbar-expand-lg navbar-dart pb-3 ps-5 bg-primary opacity-75"
@@ -22,8 +15,11 @@
         </div>
         <div class="col align-items-start p-0">
             <div class="container">
-                <div class="row">
-                    <div class="container" id="thread"></div>
+                <div class="row overflow-auto" id="thread_space">
+                    <div
+                        class="d-flex flex-column-reverse mt-auto"
+                        id="thread"
+                    ></div>
                 </div>
                 <div
                     class="row align-items-end p-3 bg-neutralVariant"
@@ -72,11 +68,18 @@
         </div>
     </div>
 </div>
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/enter.js"></script>
+<script src="/javascripts/publish.js"></script>
+<script src="/javascripts/memo.js"></script>
+<script src="/javascripts/exit.js"></script>
+<script src="/javascripts/username.js"></script>
+<script src="/javascripts/delete.js"></script>
 <script type="text/javascript">
     window.addEventListener("load", (event) => {
         const inputHeight = $("#input_space").outerHeight(true);
         const navHeight = $("#nav").outerHeight(true);
         const windowHeight = $(window).height();
-        $("#thread").height(windowHeight - inputHeight - navHeight);
+        $("#thread_space").height(windowHeight - inputHeight - navHeight);
     });
 </script>
