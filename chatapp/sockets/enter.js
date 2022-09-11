@@ -1,6 +1,6 @@
 "use strict";
 
-const { Server } = require("socket.io");
+const { Server, Socket } = require("socket.io");
 /**
  *
  * @param {Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>} socket
@@ -8,7 +8,11 @@ const { Server } = require("socket.io");
  */
 module.exports = async function (socket) {
     // 入室メッセージをクライアントに送信する
-    socket.on("enterMyselfEvent", function (name) {
-        socket.broadcast.emit("enterOtherEvent", name);
+    socket.on("enterMyselfEvent", function (roomId) {
+        socket.join(`room:${roomId}`);
+        socket.join(`${socket.data.userName}:${roomId}`);
+        socket.broadcast
+            .to(`room:${roomId}`)
+            .emit("enterOtherEvent", socket.data.userName);
     });
 };
