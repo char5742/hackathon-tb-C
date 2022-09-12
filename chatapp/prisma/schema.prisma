@@ -14,26 +14,26 @@ model User {
   id       Int        @id @default(autoincrement())
   name     String     @unique
   password String
-  roomId   Int
   rooms    UserRoom[]
   messages Message[]
 }
 
 model UserRoom {
-  id      Int      @id @default(autoincrement())
-  roomId  Int
-  created DateTime
-  updated DateTime
-  user    User?    @relation(fields: [userId], references: [id])
-  userId  Int?
+  roomId   Int
+  created  DateTime
+  updated  DateTime
+  user     User     @relation(fields: [userName], references: [name])
+  userName String
+
+  @@id([roomId, userName])
 }
 
 model Message {
-  id       Int      @id @default(autoincrement())
-  data     String
-  isMemo   Boolean
-  roomId   Int
-  created  DateTime
-  sender   User?    @relation(fields: [senderId], references: [id])
-  senderId Int?
+  id         Int      @id @default(autoincrement())
+  data       String
+  isMemo     Boolean
+  roomId     Int
+  created    DateTime
+  sender     User     @relation(fields: [senderName], references: [name])
+  senderName String
 }

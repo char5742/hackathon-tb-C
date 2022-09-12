@@ -16,15 +16,10 @@ exports.MessageUsecase = class {
                 roomId,
                 isMemo,
                 created: new Date(),
-            },
-        });
-        await prisma.user.update({
-            where: {
-                name: senderName,
-            },
-            data: {
-                messages: {
-                    connect: { id: message.id },
+                sender: {
+                    connect: {
+                        name: senderName,
+                    },
                 },
             },
         });

@@ -2,6 +2,11 @@
  * 画面全体に関する設定
  */
 
+svg,
+path {
+    fill: currentColor;
+}
+
 .sign-bg {
     height: 100vh;
     font: 14px "Lucida Grande", Meiryo, Helvetica, Arial, sans-serif;
@@ -83,31 +88,31 @@ div {
  *  メッセージの設定
  */
 
- .message-text {
+.message-text {
     white-space: pre-wrap;
- }
+}
 
 .message-contextmenu {
     text-align: center;
     display: none;
     position: fixed;
-    left:0px;
-    top:0px;
+    left: 0px;
+    top: 0px;
 }
 
 .message-contextmenu ul {
-	padding-left: 0;
+    padding-left: 0;
     margin-bottom: 0;
-	list-style: none;
-	display: inline-block;
+    list-style: none;
+    display: inline-block;
 }
 
 .message-contextmenu li {
     text-align: left;
     list-style: none;
-    cursor:pointer; 
+    cursor: pointer;
     overflow-wrap: break-word;
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
 
 .message-contextmenu.show {

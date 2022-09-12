@@ -19,4 +19,8 @@ router.post("/room", function (request, response, next) {
     response.render("room", { userName: request.body.userName });
 });
 
+router.get("/room", function (request, response, next) {
+    response.redirect(request.baseUrl + "/");
+});
+
 module.exports = router;

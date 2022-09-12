@@ -7,19 +7,33 @@ async function main() {
         data: {
             name: "rakus",
             password: "rakus",
-            roomId: 0,
+            rooms: {
+                create: {
+                    roomId: 0,
+                    created: new Date(),
+                    updated: new Date(),
+                },
+            },
         },
     });
 
-    const rakus1 = await prisma.user.create({
-        data: {
-            name: "rakus1",
-            password: "rakus1",
-            roomId: 0,
-        },
-    });
-
-    console.log({ rakus, rakus1 });
+    await [...Array(20)]
+        .map((v, k) => k)
+        .map(async (v) => {
+            await prisma.user.create({
+                data: {
+                    name: `rakus${v}`,
+                    password: `rakus${v}`,
+                    rooms: {
+                        create: {
+                            roomId: 0,
+                            created: new Date(),
+                            updated: new Date(),
+                        },
+                    },
+                },
+            });
+        });
 }
 
 main()
