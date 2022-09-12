@@ -17,7 +17,9 @@ exports.getAllUsername = function (socket, io) {
         );
         const sockets = await io.to(`room:${roomId}`).fetchSockets();
         const existUser = await UserUsecase.getUserAllByRoom(roomId);
-        const usernameList = sockets.map((v) => v.data.userName);
+        const usernameList = Array.from(
+            new Set(sockets.map((v) => v.data.userName))
+        );
 
         socket.emit("getAllUsernameResponseEvent", {
             offlineList: existUser

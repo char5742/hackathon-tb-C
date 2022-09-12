@@ -1,4 +1,4 @@
-const { User, Message } = require("@prisma/client");
+const { User, Message, UserRoom } = require("@prisma/client");
 const prisma = require("../prisma/db");
 class UsedException extends Error {}
 
@@ -23,7 +23,6 @@ exports.UserUsecase = class {
             data: {
                 name: userName,
                 password: password,
-                roomId: 1,
             },
         });
     }
@@ -38,50 +37,55 @@ exports.UserUsecase = class {
                 name: userName,
             },
         });
-        if (user.password !== password) {
+        if (user === null || user.password !== password) {
             return null;
         }
-
         return user;
     }
 
     /**
-     * @param {number} userId
+     * @param {string} userName
      * @param {number} roomId
      * @return {Promise<void>}
      */
-    static async enterRoom(userId, roomId) {
-        await prisma.user.update({
+    static async enterRoom(userName, roomId) {
+        await prisma.userRoom.upsert({
             where: {
-                id: userId,
+                roomId_userName: {
+                    userName,
+                    roomId,
+                },
             },
-            data: {
+            update: {
+                updated: new Date(),
+            },
+            create: {
                 roomId,
+                created: new Date(),
+                updated: new Date(),
+                user: {
+                    connect: {
+                        name: userName,
+                    },
+                },
             },
         });
     }
     /**
-     * @param {number} userId
+     * @param {string} userName
      * @param {number} roomId
      * @return {Promise<void>}
      */
-    static async exitRoom(userId, roomId) {
-        await prisma.user.update({
+    static async exitRoom(userName, roomId) {
+        await prisma.userRoom.update({
             where: {
-                id: userId,
+                roomId_userName: {
+                    userName,
+                    roomId,
+                },
             },
             data: {
-                roomId: 0,
-                rooms: {
-                    update: {
-                        where: {
-                            id: roomId,
-                        },
-                        data: {
-                            updated: new Date(),
-                        },
-                    },
-                },
+                updated: new Date(),
             },
         });
     }
@@ -93,6 +97,23 @@ exports.UserUsecase = class {
             },
         });
     }
+
+    static async getUserAllByRoom(roomId) {
+        return await prisma.userRoom
+            .findMany({
+                where: {
+                    roomId,
+                },
+                orderBy: {
+                    updated: "asc",
+                },
+                select: {
+                    user: true,
+                },
+            })
+            .then((v) => v.map((u) => u.user));
+    }
+
     static async getUserAll() {
         return await prisma.user.findMany();
     }

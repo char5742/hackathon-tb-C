@@ -2,6 +2,7 @@
 const { Server } = require("socket.io");
 const { getAllUsername } = require("./username");
 const { signUp, signIn } = require("./sign");
+const { UserUsecase } = require("../usecase/user");
 module.exports = function (server) {
     const io = new Server(server);
     io.on("connection", async function (socket) {

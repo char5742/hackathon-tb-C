@@ -5,9 +5,11 @@ const { Socket } = require("socket.io");
  * @param {Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>} socket
  *
  */
+const { UserUsecase } = require("../usecase/user");
+
 module.exports = function (socket) {
     // 退室メッセージをクライアントに送信する
-    socket.on("exitMyselfEvent", function () {
+    socket.on("exitMyselfEvent", async function () {
         const roomId = parseInt(
             Array.from(socket.rooms)
                 .filter((e) => e.includes("room"))[0]
@@ -16,5 +18,15 @@ module.exports = function (socket) {
         socket.leave(`room:${roomId}`);
         socket.leave(`${socket.data.userName}:${roomId}`);
         socket.broadcast.emit("exitOtherEvent", socket.data.userName);
+        await UserUsecase.exitRoom(socket.data.userName, roomId);
+    });
+    socket.on("disconnect", async (reason) => {
+        const roomId = parseInt(
+            Array.from(socket.rooms)
+                .filter((e) => e.includes("room"))[0]
+                .split(":")[1]
+        );
+        socket.broadcast.emit("exitOtherEvent", socket.data.userName);
+        await UserUsecase.exitRoom(socket.data.userName, roomId);
     });
 };

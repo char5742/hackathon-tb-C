@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "prisma migrate dev --create-only --name init && nodemon ./bin/www",
+        "start": "rm -rf ./prisma/migrations && prisma migrate reset --force --skip-seed && prisma migrate dev --name init && prisma db seed  && nodemon  ./bin/www",
         "migrate": "prisma migrate dev --name init"
     },
     "dependencies": {

@@ -1,20 +1,51 @@
 <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-dart pb-3 ps-5 bg-primary opacity-75"
+    class="navbar navbar-expand-lg navbar-dart bg-primary opacity-75 position-absolute vw-100 p-0"
 >
-    <img src="/img/Rink.svg" alt="logo" />
-</nav>
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid p-0">
+        <svg
+            class="text-white my-3"
+            style="width: 20%; height: 3rem"
+            alt="logo"
+        >
+            <use xlink:href="/img/Rink.svg#rakus_icon"></use>
+        </svg>
+        <button
+            class="navbar-toggler me-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#userlist_space"
+            aria-controls="userlist_space"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div
-            class="col-3 align-items-start p-0 bg-secondary"
+            class="collapse navbar-collapse col-3 align-items-start p-0 bg-secondary overflow-scroll"
+            style="--bs-bg-opacity: 0.8; max-height: 50vh"
+            id="userlist_space"
+        >
+            <div class="d-lg-none">
+                <h3 class="text-center bg-secondary text-white">入室者</h3>
+                <div class="user_list"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid h-100 navpadding">
+    <div class="row h-100">
+        <div
+            class="col-3 d-lg-flex flex-column d-none p-0 h-100 overflow-hidden bg-secondary"
             style="--bs-bg-opacity: 0.8"
+            id="userlist_space"
         >
             <h3 class="text-center bg-secondary text-white">入室者</h3>
-            <div id="user_list"></div>
+            <div class="user_list overflow-scroll"></div>
         </div>
         <div class="col align-items-start p-0">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row overflow-auto" id="thread_space">
                     <div
                         class="d-flex flex-column-reverse mt-auto"
@@ -33,52 +64,66 @@
                             value="{{userName}}"
                         />
                     </div>
-                    <div class="col-11 room-message">
+                    <div class="col sroom-message">
                         <textarea
                             id="message"
-                            rows="3"
+                            rows="1"
+                            data-max-rows="3"
                             class="form-control"
                             placeholder="投稿文を入力してください"
                         ></textarea>
                     </div>
-                    <div class="col room-submit">
-                        <div class="row">
-                            <button
-                                value="メモ"
-                                class="btn btn-secondary w-auto"
-                                onclick="publish(isMemo=true);"
-                            >
-                                <i
-                                    class="bi bi-pencil-square text-white fs-4"
-                                ></i>
-                            </button>
-                        </div>
-                        <div class="row">
-                            <button
-                                value="投稿"
-                                class="btn btn-primary w-auto"
-                                onclick="publish();"
-                            >
-                                <i class="bi bi-send text-white fs-4"></i>
-                            </button>
-                        </div>
+                    <div class="col col-auto room-submit d-flex flex-row">
+                        <button
+                            value="投稿"
+                            class="btn btn-primary w-auto"
+                            onclick="publish();"
+                        >
+                            <i class="bi bi-send text-white fs-4"></i>
+                        </button>
+                        <button
+                            value="メモ"
+                            class="btn btn-secondary w-auto"
+                            onclick="publish(isMemo=true);"
+                        >
+                            <i class="bi bi-pencil-square text-white fs-4"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="/javascripts/socket.js"></script>
 <script src="/javascripts/enter.js"></script>
 <script src="/javascripts/publish.js"></script>
 <script src="/javascripts/exit.js"></script>
 <script src="/javascripts/username.js"></script>
-<script src="/javascripts/delete.js"></script>
+
 <script type="text/javascript">
-    window.addEventListener("load", (event) => {
+    function resize() {
         const inputHeight = $("#input_space").outerHeight(true);
         const navHeight = $("#nav").outerHeight(true);
         const windowHeight = $(window).height();
         $("#thread_space").height(windowHeight - inputHeight - navHeight);
+        $(".navpadding").css("padding-top", navHeight);
+    }
+    window.addEventListener("load", (event) => {
+        resize();
+    });
+    $(window).resize(function () {
+        resize();
+    });
+    $("#message").keyup((e) => {
+        if (
+            $("#message").val().split("\n").length <=
+                $("#message").data().maxRows &&
+            $("#message").val().split("\n").length !==
+                $("#message").prop("rows")
+        ) {
+            $("#message").prop("rows", $("#message").val().split("\n").length);
+            resize();
+        }
     });
 </script>
