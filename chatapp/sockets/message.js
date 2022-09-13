@@ -20,8 +20,7 @@ exports.getRoomMessage = function (socket) {
         const room = await UserUsecase.getUserRoom(userName, roomId);
         const message = await MessageUsecase.getRoomMessage(
             roomId,
-            room.created,
-            null
+            room.created
         );
         socket.emit("getRoomMessageResponseEvent", {
             message: message.map((m) => ({
