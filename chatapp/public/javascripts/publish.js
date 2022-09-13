@@ -18,7 +18,6 @@ function publish(isMemo = false) {
 
 // エンターキーで投稿する
 $("#message").keydown(function (e) {
-    console.log(e.key);
     if (e.ctrlKey) {
         if (e.key === "Enter") {
             publish();
