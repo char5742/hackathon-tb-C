@@ -17,16 +17,20 @@ module.exports = function (socket) {
         );
         socket.leave(`room:${roomId}`);
         socket.leave(`${socket.data.userName}:${roomId}`);
-        socket.broadcast.emit("exitOtherEvent", socket.data.userName);
+        socket.broadcast
+            .to(`room:${roomId}`)
+            .emit("exitOtherEvent", socket.data.userName);
         await UserUsecase.exitRoom(socket.data.userName, roomId);
     });
-    socket.on("disconnect", async (reason) => {
+    socket.on("disconnecting", async (reason) => {
         const roomId = parseInt(
             Array.from(socket.rooms)
                 .filter((e) => e.includes("room"))[0]
                 .split(":")[1]
         );
-        socket.broadcast.emit("exitOtherEvent", socket.data.userName);
+        socket.broadcast
+            .to(`room:${roomId}`)
+            .emit("exitOtherEvent", socket.data.userName);
         await UserUsecase.exitRoom(socket.data.userName, roomId);
     });
 };
