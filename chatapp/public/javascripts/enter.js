@@ -6,6 +6,7 @@ const roomId = 1;
 // 入室メッセージイベントを送信する
 socket.emit("enterMyselfEvent", roomId);
 socket.emit("getAllUsernameEvent");
+socket.emit("getLogEvent");
 
 // サーバから受信した入室メッセージを画面上に表示する
 socket.on("enterOtherEvent", function (name) {

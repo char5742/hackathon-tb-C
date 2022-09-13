@@ -1,8 +1,8 @@
 "use strict";
-const { Server } = require("socket.io");
+const { Server, Socket } = require("socket.io");
 const { getAllUsername } = require("./username");
 const { signUp, signIn } = require("./sign");
-const { UserUsecase } = require("../usecase/user");
+const { getRoomMessage, getLog } = require("./message");
 module.exports = function (server) {
     const io = new Server(server);
     io.on("connection", async function (socket) {
@@ -10,7 +10,6 @@ module.exports = function (server) {
         await socket.join(socket.data.userName);
         // 投稿モジュールの呼出
         require("./publish")(socket, io);
-
         // 入室モジュールの呼出
         require("./enter")(socket);
 
@@ -21,6 +20,9 @@ module.exports = function (server) {
 
         // 削除モジュールの呼出
         require("./delete")(socket, io);
+
+        getRoomMessage(socket);
+        getLog(socket);
     });
 
     io.of("/sign").on("connection", async function (socket) {

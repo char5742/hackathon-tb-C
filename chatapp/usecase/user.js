@@ -89,11 +89,36 @@ exports.UserUsecase = class {
             },
         });
     }
-
+    /**
+     * @param {string} userName
+     * @return {Promise<User|null>}
+     */
     static async getUserByName(userName) {
         return await prisma.user.findUnique({
             where: {
                 name: userName,
+            },
+            include: {
+                rooms: {
+                    created: true,
+                    updated: true,
+                },
+            },
+        });
+    }
+
+    /**
+     * @param {string} userName
+     * @param {number} roomId
+     * @return {Promise<UserRoom|null>}
+     */
+    static async getUserRoom(userName, roomId) {
+        return await prisma.userRoom.findUnique({
+            where: {
+                roomId_userName: {
+                    userName,
+                    roomId,
+                },
             },
         });
     }
