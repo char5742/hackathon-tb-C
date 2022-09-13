@@ -10,8 +10,13 @@ const { UserUsecase } = require("../usecase/user");
  */
 exports.getAllUsername = function (socket, io) {
     socket.on("getAllUsernameEvent", async function () {
-        const sockets = await io.fetchSockets();
-        const existUser = await UserUsecase.getUserAllByRoom(0);
+        const roomId = parseInt(
+            Array.from(socket.rooms)
+                .filter((e) => e.includes("room"))[0]
+                .split(":")[1]
+        );
+        const sockets = await io.to(`room:${roomId}`).fetchSockets();
+        const existUser = await UserUsecase.getUserAllByRoom(roomId);
         const usernameList = Array.from(
             new Set(sockets.map((v) => v.data.userName))
         );

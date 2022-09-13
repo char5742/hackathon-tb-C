@@ -1,25 +1,23 @@
 "use strict";
 
 // 投稿メッセージをサーバに送信する
-function publish() {
-    // ユーザ名を取得
-    const userName = $("#userName").val();
+function publish(isMemo = false) {
     // 入力されたメッセージを取得
     const data = $("#message").val();
-    console.log(data);
+
+    // 空白投稿不可にする
     if ((!data)||!data.match(/\S/g)) {
         $("#message").val("");
         return;
     }
     $("#message").val("");
     // 投稿内容を送信
-    socket.emit("sendMessageEvent", { userName, data });
+    socket.emit("sendMessageEvent", { data, isMemo });
     return false;
 }
 
 // エンターキーで投稿する
 $("#message").keydown(function (e) {
-    console.log(e.key);
     if (e.ctrlKey) {
         if (e.key === "Enter") {
             publish();
@@ -31,7 +29,7 @@ $("#message").keydown(function (e) {
 // サーバから受信した投稿メッセージを画面上に表示する
 socket.on(
     "receiveMessageEvent",
-    function ({ userName, message, sendDate, messageId }) {
+    function ({ userName, message, sendDate, messageId, isMemo = false }) {
         // 投稿時刻sendDateのフォーマット変換
         const date = new Date(Date.parse(sendDate));
         const year = date.getFullYear();
@@ -50,7 +48,9 @@ socket.on(
             // isMyMessageによってスタイルを変更
             const name_align = isMyMessage ? "text-end" : "text-start";
             const container_align = isMyMessage ? "justify-content-end" : "justify-content-start";
-            const color = isMyMessage ? "bg-primary" : "bg-tertiary";
+            let color = "bg-primary";
+            if (isMemo === true) color = "bg-secondary";
+            if (isMyMessage === false) color = "bg-tertiary";
 
             
             $("#thread").prepend(

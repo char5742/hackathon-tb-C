@@ -9,7 +9,7 @@ async function main() {
             password: "rakus",
             rooms: {
                 create: {
-                    roomId: 0,
+                    roomId: 1,
                     created: new Date(),
                     updated: new Date(),
                 },
@@ -26,7 +26,7 @@ async function main() {
                     password: `rakus${v}`,
                     rooms: {
                         create: {
-                            roomId: 0,
+                            roomId: 1,
                             created: new Date(),
                             updated: new Date(),
                         },

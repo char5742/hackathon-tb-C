@@ -42,26 +42,20 @@ exports.MessageUsecase = class {
     /**
      *
      * @param {number} roomId
+     * @param {Date|undefined} since
+     * @param {boolean|undefined} isMemo
      */
-    static async getRoomMessage(roomId) {
+    static async getRoomMessage(roomId, since, isMemo) {
         return await prisma.message.findMany({
             where: {
                 roomId,
-                isMemo: false,
+                isMemo,
+                created: {
+                    gt: since,
+                },
             },
-        });
-    }
-    /**
-     *
-     * @param {number} senderId
-     * @param {number} roomId
-     */
-    static async getMemo(senderId, roomId) {
-        return await prisma.message.findMany({
-            where: {
-                roomId,
-                senderId,
-                isMemo: true,
+            orderBy: {
+                created: "asc",
             },
         });
     }
