@@ -1,10 +1,11 @@
 <nav
-    id="nav"
     class="navbar navbar-expand-lg navbar-dart bg-primary opacity-75 position-absolute vw-100 p-0"
+    style="--bs-bg-opacity: 0.75; z-index: 1"
 >
     <div class="container-fluid p-0">
         <svg
-            class="text-white my-3"
+            id="nav_icon"
+            class="text-white m-3"
             style="width: 20%; height: 3rem"
             alt="logo"
         >
@@ -23,18 +24,21 @@
         </button>
 
         <div
-            class="collapse navbar-collapse col-3 align-items-start p-0 bg-secondary overflow-scroll"
+            class="collapse navbar-collapse col-3 p-0 bg-secondary"
             style="--bs-bg-opacity: 0.8; max-height: 50vh"
             id="userlist_space"
         >
-            <div class="d-lg-none">
-                <h3 class="text-center bg-secondary text-white">入室者</h3>
-                <div class="user_list"></div>
+            <div
+                class="d-lg-none d-flex flex-column overflow-hiden"
+                style="max-height: 50vh"
+            >
+                <h3 class="text-center bg-secondary text-white m-0">入室者</h3>
+                <div class="user_list overflow-scroll"></div>
             </div>
         </div>
     </div>
 </nav>
-<div class="container-fluid h-100 navpadding">
+<div class="container-fluid vh-100 navpadding">
     <div class="row h-100">
         <div
             class="col-3 d-lg-flex flex-column d-none p-0 h-100 overflow-hidden bg-secondary"
@@ -105,7 +109,7 @@
 <script type="text/javascript">
     function resize() {
         const inputHeight = $("#input_space").outerHeight(true);
-        const navHeight = $("#nav").outerHeight(true);
+        const navHeight = $("#nav_icon").outerHeight(true);
         const windowHeight = $(window).height();
         $("#thread_space").height(windowHeight - inputHeight - navHeight);
         $(".navpadding").css("padding-top", navHeight);
