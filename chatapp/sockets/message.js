@@ -28,6 +28,7 @@ exports.getRoomMessage = function (socket) {
                 message: m.data,
                 sendDate: m.created,
                 messageId: m.id,
+                isMemo: m.isMemo,
             })),
         });
     });
