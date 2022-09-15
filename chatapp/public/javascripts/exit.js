@@ -26,4 +26,5 @@ socket.on('exitOtherEvent', function (name) {
     $("#thread_space").animate(
         {scrollTop: $("#thread_space")[0].scrollHeight - $("#thread_space").height()}
     );
+    socket.emit("getAllUsernameEvent");
 });
