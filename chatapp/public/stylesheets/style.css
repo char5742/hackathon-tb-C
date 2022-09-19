@@ -1,83 +1,141 @@
 /*
  * 画面全体に関する設定
  */
-body {
-    font: 14px "Lucida Grande", Meiryo, Helvetica, Arial, sans-serif;
+
+svg,
+path {
+    fill: currentColor;
 }
 
-a {
-    color: #00B7FF;
+.sign-bg {
+    height: 100vh;
+    font: 14px "Lucida Grande", Meiryo, Helvetica, Arial, sans-serif;
+    background-image: url("/img/back.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* a {
+    color: #00b7ff;
 }
 
 div {
     margin: 20px 0px;
+} */
+
+#img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 618px;
+    height: 618px;
+    background-color: white;
+    border-width: 35px;
+    border-color: #dee2e6;
+    border-radius: 58px;
+    border-style: solid;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 750px) {
+    #img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 350px;
+        /* height: 400px; */
+    }
+    .svg {
+        width: 200px;
+        height: auto;
+    }
+}
+
+#Rink {
+    position: relative; /* 今の位置を基準 */
+    top: 50px; /* 上から10px */
+}
+#Rinkb {
+    position: relative; /* 今の位置を基準 */
+    top: 55px; /* 上から10px */
 }
 
 .row {
-    margin: 20px;
 }
 
 /*
  * ボタンの共通設定
  */
 .common-button {
-
 }
 
 /*
  * トップ画面（index.hbs）に関する設定
  */
-.index-user_name {
+.index-form {
+    display: flex;
+    flex-direction: column;
+}
 
+.signup-form {
+    display: flex;
+    flex-direction: column;
 }
 
 .index-user_name_text {
     width: 200px;
 }
 
-.index-enter {
+.index-password_text {
+    width: 200px;
+}
 
+.index-enter {
 }
 
 .index-enter_button {
-
-}
-
-/*
- * チャットルーム画面（room.hbs）に関する設定
- */
-.room-login_user {
-
- }
-
-.room-message {
-
 }
 
 .room-message_textarea {
     width: 500px;
 }
 
-.room-submit {
+/*
+ *  メッセージの設定
+ */
 
+.message-text {
+    white-space: pre-wrap;
 }
 
-.room-publish_button {
-
+.message-contextmenu {
+    text-align: center;
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
 }
 
-.room-memo_button {
-
+.message-contextmenu ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    display: inline-block;
 }
 
-.room-thread {
-
+.message-contextmenu li {
+    text-align: left;
+    list-style: none;
+    cursor: pointer;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-.room-exit {
-
-}
-
-.room-exit_button {
-
+.message-contextmenu.show {
+    display: block;
 }

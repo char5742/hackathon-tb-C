@@ -1,0 +1,47 @@
+<div class="sign-bg">
+    <div id="img">
+        <div class="d-flex justify-content-center">
+            <div id="Rink">
+                <svg class="text-primary svg" alt="logo">
+                    <use xlink:href="/img/Rink.svg#rakus_icon"></use>
+                </svg>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center" id="Rinkb">
+            <form method="post" action="/room">
+                <div class="d-flex flex-column justify-content-center mt-5">
+                    <label class="mt-2">ユーザ名</label>
+                    <input
+                        type="text"
+                        id="userName"
+                        name="userName"
+                        class="index-user_name_text form-control"
+                    />
+                    <label class="mt-2">パスワード</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="index-password_text form-control"
+                    />
+                    <a
+                        class="text-end text-muted text-decoration-none"
+                        href="/signup"
+                        >新規の方はこちら</a
+                    >
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <input
+                        type="button"
+                        value="入室する"
+                        class="common-button index-enter_button"
+                        onclick="enter();"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/index.js"></script>
